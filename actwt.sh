@@ -20,6 +20,7 @@ remve(){
 
 perms(){
     chown -R root:wheel /Applications/ActivityWatch.app
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/ActivityWatch.app", hidden:false}'
     open x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility && open /System/Library/CoreServices/ && open /Applications/
 
 }
