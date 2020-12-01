@@ -1,11 +1,18 @@
 
 #! /bin/bash
 
-#rm -rf "/Library/Application Support/activitywatch"
-rmefil(){
-    usn=$(ls -t /Users | awk 'NR==1 {print $1}')
+apt=ActivityWatch
+usn=$(ls -t /Users | awk 'NR==1 {print $1}')
 
-    [ -d "/Users/$usn/Library/Application Support/activitywatch" ] && rm -rf "/Users/$usn/Library/Application Support/activitywatch"
+chk(){
+    if [ -d "/Applications/$apt.app" ]; then
+        pkill -f "ActivityWatch"
+        osascript -e 'tell application "System Events" to delete login item "ActivityWatch"'
+        rm -rf "/Applications/ActivityWatch.app/"
+        rm -rf "/Users/$usn/Library/Application Support/activitywatch"
+
+    fi
+
 }
 
 
@@ -32,7 +39,7 @@ setin(){
             echo ""
             exit
     else
-        rmefil
+        chk
         inst
         remve
         perms
